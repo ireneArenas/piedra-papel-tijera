@@ -1,0 +1,7 @@
+{
+  "name": "game-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
