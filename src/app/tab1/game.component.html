@@ -1,0 +1,43 @@
+<div class="container">
+
+    <app-menu></app-menu>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col class="user">
+                <p>Puntuacion: {{scoreUser}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="box" (click)="chooseOption(tijera)">
+                <fa-icon [icon]="faHandScissors" class="icon" ></fa-icon>
+            </ion-col>
+            <ion-col class="box"  (click)="chooseOption(piedra)">
+                <fa-icon [icon]="faHandRock" class="icon" ></fa-icon>
+            </ion-col>
+            <ion-col class="box" (click)="chooseOption(papel)">
+                <fa-icon [icon]="faHandPaper" class="icon"  ></fa-icon>
+            </ion-col>
+        </ion-row>
+        <ion-row class="scores">
+            <ion-col>
+                <span *ngIf="stringOptionUser"> Tú: {{stringOptionUser}}</span>
+            </ion-col>
+            <ion-col>
+                <span *ngIf="stringOptionComputer"> Máquina: {{stringOptionComputer}}</span>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf='textScore'>
+            <ion-col class="who-win">
+                <p>{{textScore}}</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div >
+        
+    </div>
+    
+</div>
+
+
