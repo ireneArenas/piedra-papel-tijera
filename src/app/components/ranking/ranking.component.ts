@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UserModel } from '../models/user.model';
-import { UserService } from '../services/user.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserModel } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-ranking',
@@ -8,6 +8,9 @@ import { UserService } from '../services/user.service';
   styleUrls: ['ranking.component.scss']
 })
 export class RankingComponent implements OnInit {
+
+  @Input() rankingShow : boolean;
+  @Output() getRanking = new EventEmitter();
 
   public ranking: UserModel[] = [];
 
@@ -19,6 +22,9 @@ export class RankingComponent implements OnInit {
     this.ranking = this.userService.getRanking().sort( (a,b) => {
       return b.score - a.score;
     });
+    if(this.ranking.length > 0) {
+      this.getRanking.emit(true);
+    }
   }
 
 }

@@ -1,0 +1,11 @@
+
+
+    <ion-list *ngIf="rankingShow">
+      <ion-item *ngFor="let ran of ranking">
+        <ion-label>
+          <h2>{{ran.name}}</h2>
+          <h3>{{ran.score}}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+

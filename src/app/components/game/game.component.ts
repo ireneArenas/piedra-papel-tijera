@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faHandScissors, faHandRock, faHandPaper } from '@fortawesome/free-solid-svg-icons';
+import { LoadingController } from '@ionic/angular';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,7 +15,6 @@ export class GameComponent implements OnInit {
   faHandRock = faHandRock;
   faHandPaper = faHandPaper;
 
-
   public user: UserModel;
   public tijera = 2;
   public papel = 1;
@@ -24,23 +24,35 @@ export class GameComponent implements OnInit {
   public scoreUser: number = 0;
   public textScore: string = '';
   public ranking: UserModel[] = [];
+  public rankingShow: boolean = false;
+  public showButton: boolean = false;
 
   private optionUser: number;
   private optionComputer: number;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private loadingController: LoadingController) { }
 
   ngOnInit(): void {
-    //this.getUser();
     this.user = this.userService.getuser();
     this.scoreUser = this.user.score || 0;
-    console.log(this.user);
   }
 
   public chooseOption(option:number) {
     this.optionUser = option;
     this.stringOptionUser =this.getString(option);
-    setTimeout(() => this.gameComputer(), 1000);
+    this.cleanStrings();
+    this.presentLoading();
+    setTimeout(() => this.gameComputer(), 2000);
+  }
+
+  public showRanking() {
+    this.rankingShow = !this.rankingShow;
+  }
+
+  public getRanking(e: boolean) {
+    this.showButton = e;
   }
 
   private getString(option: number): string {
@@ -54,6 +66,20 @@ export class GameComponent implements OnInit {
     this.stringOptionComputer = this.getString(this.optionComputer);
     this.whoWin();
   }
+
+  private cleanStrings(): void {
+    this.textScore = '';
+    this.stringOptionComputer = '';
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Pensando...',
+      duration: 1500
+    });
+    await loading.present();
+  }
+
 
   private whoWin() {
     if(this.optionUser === this.optionComputer) {
@@ -92,11 +118,8 @@ export class GameComponent implements OnInit {
           break;
       }
     }
-    console.log(this.user);
     this.user.score = this.scoreUser;
     this.userService.setUser(this.user);
   }
-
-  
 
 }
