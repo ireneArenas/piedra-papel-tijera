@@ -15,7 +15,7 @@ export class GameComponent implements OnInit {
   faHandRock = faHandRock;
   faHandPaper = faHandPaper;
 
-  public user: UserModel;
+  public user: UserModel = new UserModel();
   public tijera = 2;
   public papel = 1;
   public piedra = 0;
@@ -41,7 +41,7 @@ export class GameComponent implements OnInit {
 
   public chooseOption(option:number) {
     this.optionUser = option;
-    this.stringOptionUser =this.getString(option);
+    this.stringOptionUser = this.getString(option);
     this.cleanStrings();
     this.presentLoading();
     setTimeout(() => this.gameComputer(), 2000);
@@ -118,6 +118,7 @@ export class GameComponent implements OnInit {
           break;
       }
     }
+    console.log(this.textScore);
     this.user.score = this.scoreUser;
     this.userService.setUser(this.user);
   }

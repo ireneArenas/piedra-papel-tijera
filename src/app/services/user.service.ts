@@ -5,7 +5,7 @@ import { UserModel } from "../models/user.model";
 Injectable()
 export class UserService {
 
-    public user: UserModel;
+    public user: UserModel = new UserModel();
     public rankingUser: UserModel[] = [];
 
     constructor(){}
