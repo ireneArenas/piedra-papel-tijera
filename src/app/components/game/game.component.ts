@@ -118,7 +118,6 @@ export class GameComponent implements OnInit {
           break;
       }
     }
-    console.log(this.textScore);
     this.user.score = this.scoreUser;
     this.userService.setUser(this.user);
   }

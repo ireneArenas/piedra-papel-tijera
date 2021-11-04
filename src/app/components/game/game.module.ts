@@ -6,6 +6,7 @@ import { GameComponent } from './game.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MenuComponent } from '../menu/menu.component';
 import { RankingComponent } from '../ranking/ranking.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RankingComponent } from '../ranking/ranking.component';
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FontAwesomeModule
+    FontAwesomeModule,
+    IonicModule
   ],
   providers: []
 })

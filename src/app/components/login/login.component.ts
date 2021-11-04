@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
+    
     if (this.formLogin.controls['name'].status === 'INVALID') {
       this.presentAlert();
     } else {
@@ -54,12 +55,22 @@ export class LoginComponent implements OnInit {
   }
 
   private getUser(): void {
-    this.ranking = this.userService.getRanking();
-    const user = this.ranking.filter( (user) => {
-      return user.name === this.user.name;
-    });
-    if(user.length > 0) {
-      this.user.score = user[0].score;
+    const storage = JSON.parse(localStorage.getItem('players'));
+    if (storage) {
+      const user = storage.filter( (user) => {
+        return user.name === this.user.name;
+      });
+      if(user.length > 0) {
+        this.user.score = user[0].score;
+      }
+    } else {
+      this.ranking = this.userService.getRanking();
+      const user = this.ranking.filter( (user) => {
+        return user.name === this.user.name;
+      });
+      if(user.length > 0) {
+        this.user.score = user[0].score;
+      }
     }
     this.userService.setUser(this.user);
   }

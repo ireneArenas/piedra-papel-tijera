@@ -5,6 +5,7 @@ import { LoginComponent } from './login.component';
 import { routes } from './login.routes';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
+    IonicModule
   ],
   providers: []
 })

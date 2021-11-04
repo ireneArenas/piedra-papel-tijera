@@ -19,7 +19,17 @@ export class UserService {
     }
 
     setRanking(user: UserModel){
-        this.rankingUser.push(user);
+        const userExist = this.rankingUser.find(exist => exist.name === user.name);
+        if(!userExist) {
+            this.rankingUser.push(user);
+        } else {
+            this.rankingUser.map( val => {
+                if (val.name === user.name) {
+                    val.score = user.score;
+                }
+            })
+        } 
+        localStorage.setItem('players', JSON.stringify(this.rankingUser));
     }
 
     getRanking(): UserModel[] {
